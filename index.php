@@ -6,12 +6,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
-        <script type="text/javascript" src="/js/themes/gray.js"></script>
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
-        <script type="text/javascript" src="scripts/histogram.js"></script>
-        <script type="text/javascript" src="scripts/canvas-operations.js"></script>
-        <script type="text/javascript" src="scripts/image-operations.js"></script>
-        <script type="text/javascript" src="scripts/canvas.js"></script>
+        <script data-main="scripts/main.js" src="scripts/require.js"></script>
     </head>
     <body class = "main-content">
         <div class = "main-content-div">

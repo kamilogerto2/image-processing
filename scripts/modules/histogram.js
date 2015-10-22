@@ -1,6 +1,7 @@
- var histogram = {
+define('modules/histogram', function () {
+    return function () {
      
-        draw: function (element, histogramData, resolution) {
+        this.draw = function (element, histogramData, resolution) {
             
             element.highcharts({
             chart: {
@@ -78,9 +79,9 @@
                 }
                 }]
             })
-        }, 
+        } 
      
-     getHistogramDataFromBinaryImage: function(imagePixels) {
+     this.getHistogramDataFromBinaryImage = function(imagePixels) {
             var histogramData = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             for (var i = 0, n = imagePixels.length; i < n; i += 4) {
                 histogramData[Math.floor(imagePixels[i]/10)] = histogramData[Math.floor(imagePixels[i]/10)] + 1; 
@@ -88,7 +89,7 @@
             return histogramData;
         },
      
-     getHistogramDataFromRedCanal: function(imagePixels) {
+     this.getHistogramDataFromRedCanal = function(imagePixels) {
             var histogramData = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             for (var i = 0, n = imagePixels.length; i < n; i += 4) {
                 histogramData[Math.floor(imagePixels[i]/10)] = histogramData[Math.floor(imagePixels[i]/10)] + 1; 
@@ -96,7 +97,7 @@
             return histogramData;
         },
      
-     getHistogramDataFromGreenCanal: function(imagePixels) {
+     this.getHistogramDataFromGreenCanal = function(imagePixels) {
             var histogramData = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             for (var i = 0, n = imagePixels.length; i < n; i += 4) {
                 histogramData[Math.floor(imagePixels[i+1]/10)] = histogramData[Math.floor(imagePixels[i+1]/10)] + 1; 
@@ -104,13 +105,14 @@
             return histogramData;
         },
      
-     getHistogramDataFromBlueCanal: function(imagePixels) {
+     this.getHistogramDataFromBlueCanal = function(imagePixels) {
             var histogramData = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             for (var i = 0, n = imagePixels.length; i < n; i += 4) {
                 histogramData[Math.floor(imagePixels[i+2]/10)] = histogramData[Math.floor(imagePixels[i+2]/10)] + 1; 
             }
             return histogramData;
         }
- };
+    }
+ });
     
    
