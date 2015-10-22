@@ -1,0 +1,14 @@
+{
+  "name": "bud-star",
+  "version": "1.4.14",
+  "description": "bus star",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kamil Mikosz",
+  "license": "ISC",
+  "devDependencies": {
+    "mathjs": "^2.4.0"
+  }
+}
