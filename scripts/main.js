@@ -6,62 +6,50 @@ requirejs(['modules/imageCanvasOperations', 'modules/canvasOperations', 'modules
             histogramObject = new histogram(),
             image = canvasOperationsObject.readImage('image_source');
 
-       //binary image
         (function () {
-            var canvasContext = canvasOperationsObject.getCanvasContext('canv');
+            //binary image
+            convertImageAndShowInHTMLWithHistogarm(
+                'canv',
+                '#container',
+                imageOperationsObject.convertToBinary,
+                histogramObject.getHistogramDataFromBinaryImage
+            );
+            //only red canal in image
+            convertImageAndShowInHTMLWithHistogarm(
+                'canvRed',
+                '#containerRed',
+                imageOperationsObject.convertToRCanal,
+                histogramObject.getHistogramDataFromRedCanal
+            );
+            //only green canal in image
+            convertImageAndShowInHTMLWithHistogarm(
+                'canvGreen',
+                '#containerGreen',
+                imageOperationsObject.convertToGCanal,
+                histogramObject.getHistogramDataFromGreenCanal
+            );
+            //only blue canal in image
+            convertImageAndShowInHTMLWithHistogarm(
+                'canvBlue',
+                '#containerBlue',
+                imageOperationsObject.convertToBCanal,
+                histogramObject.getHistogramDataFromBlueCanal
+            );
+        })();
+
+
+        function convertImageAndShowInHTMLWithHistogarm (canvId, containerId, convertToFunction, getHistogramDataFunction) {
+            var canvasContext = canvasOperationsObject.getCanvasContext(canvId);
 
             canvasContext.drawImage(image, 0, 0);
-            var pixelsContext = imageOperationsObject.convertToBinary(
+            var pixelsContext = convertToFunction(
                 canvasOperationsObject.getCanvasPixelContext(canvasContext, 400, 400)
             );
 
             canvasOperationsObject.putImage(canvasContext, pixelsContext);
-            var histogramData = histogramObject.getHistogramDataFromBinaryImage(pixelsContext.data);
-            histogramObject.draw($('#container'), histogramData, 160000);
-        })();
-
-        //red image
-        (function () {
-            var canvasContext = canvasOperationsObject.getCanvasContext('canvRed');
-
-            canvasContext.drawImage(image, 0, 0);
-            var pixelsContext = imageOperationsObject.convertToRCanal(
-                canvasOperationsObject.getCanvasPixelContext(canvasContext, 400, 400)
-            );
-
-            canvasOperationsObject.putImage(canvasContext, pixelsContext);
-            var histogramData = histogramObject.getHistogramDataFromRedCanal(pixelsContext.data);
-            histogramObject.draw($('#containerRed'), histogramData, 160000);
-
-        })();
-
-        //green image
-        (function () {
-            var canvasContext = canvasOperationsObject.getCanvasContext('canvGreen');
-
-            canvasContext.drawImage(image, 0, 0);
-            var pixelsContext = imageOperationsObject.convertToGCanal(
-                canvasOperationsObject.getCanvasPixelContext(canvasContext, 400, 400)
-            );
-
-            canvasOperationsObject.putImage(canvasContext, pixelsContext);
-            var histogramData = histogramObject.getHistogramDataFromGreenCanal(pixelsContext.data);
-            histogramObject.draw($('#containerGreen'), histogramData, 160000);
-        })();
-
-        //blue image
-        (function () {
-            var canvasContext = canvasOperationsObject.getCanvasContext('canvBlue');
-
-            canvasContext.drawImage(image, 0, 0);
-            var pixelsContext = imageOperationsObject.convertToBCanal(
-                canvasOperationsObject.getCanvasPixelContext(canvasContext, 400, 400)
-            );
-
-            canvasOperationsObject.putImage(canvasContext, pixelsContext);
-            var histogramData = histogramObject.getHistogramDataFromBlueCanal(pixelsContext.data);
-            histogramObject.draw($('#containerBlue'), histogramData, 160000);
-        })();
+            var histogramData = getHistogramDataFunction(pixelsContext.data);
+            histogramObject.draw($(containerId), histogramData, 160000);
+        }
     });
 });
 
